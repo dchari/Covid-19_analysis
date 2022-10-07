@@ -141,23 +141,6 @@ From #PercentPopulationVaccinated
 
 
 -- Creating View to store data for later visualizations
-
-Create View PopulationVaccinatedPercentage as
-Select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
-, SUM(CONVERT(bigint,vac.new_vaccinations)) OVER (Partition by dea.Location Order by dea.location, dea.Date) as RollingPeopleVaccinated
---, (RollingPeopleVaccinated/population)*100
-From portfolio..coviddeaths dea
-Join portfolio..covidvac vac
-	On dea.location = vac.location
-	and dea.date = vac.date
-where dea.continent is not null 
-
-select *
-FROM PopulationVaccinatedPercentage
-
-
-
-
 /*
 Queries used for Tableau Project
 */
